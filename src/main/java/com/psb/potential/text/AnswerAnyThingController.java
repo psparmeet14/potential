@@ -1,5 +1,6 @@
 package com.psb.potential.text;
 
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,10 @@ public class AnswerAnyThingController {
 
     @PostMapping("/askAnything")
     public String askAnything(@RequestParam("question") String question, Model model) {
-
+        ChatResponse chatResponse = chatService.generateAnswer(question);
+        System.out.println(chatResponse);
+        model.addAttribute("question", question);
+        model.addAttribute("answer", chatResponse.getResult().getOutput().getText());
         return "askAnything";
     }
 }

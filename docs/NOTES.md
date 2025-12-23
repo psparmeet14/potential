@@ -17,3 +17,9 @@
    Values outside this range may not be accepted by the API.
 
 2. **Max Tokens**: The maximum number of tokens (words or word pieces) that the model can generate in a single response. This limits the length of the output.
+
+3. **Several Advisors**:
+   - MessageChatMemoryAdvisor: To maintain chat history
+   - QuestionAnswerAdvisor: When working with RAG
+   - SimpleLoggerAdvisor: To log the outgoing and incoming messages
+   - SafeGuardAdvisor: To prevent the model from generating offensive content
