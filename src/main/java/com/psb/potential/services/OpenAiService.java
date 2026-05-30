@@ -18,7 +18,11 @@ public class OpenAiService {
     }
 
     public ChatResponse generateAnswer(String question) {
-        return chatClient.prompt(question).call().chatResponse();
+        return chatClient.prompt()
+                .user(question)
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, "default"))
+                .call()
+                .chatResponse();
     }
 
 }
