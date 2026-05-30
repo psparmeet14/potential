@@ -25,6 +25,10 @@ After building and running the application, it will be available at [http://loca
 - This project is intended for learning and experimentation.
 - More features and endpoints may be added as practice progresses.
 
+## Gradle
+- Using a Version Catalog (libs.versions.toml) is one of the best Gradle improvements to make.
+- It centralizes all versions and dependency coordinates, making upgrades much easier.
+
 ---
 For more details, see the `NOTES.md` file in the `docs/` directory.
 

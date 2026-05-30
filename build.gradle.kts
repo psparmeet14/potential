@@ -1,7 +1,7 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.5.6"
-	id("io.spring.dependency-management") version "1.1.7"
+	alias(libs.plugins.spring.boot)
+	alias(libs.plugins.dependency.management)
 }
 
 group = "com.psb.potential"
@@ -13,39 +13,31 @@ java {
 	}
 }
 
-configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
-}
+//configurations {
+//	compileOnly {
+//		extendsFrom(configurations.annotationProcessor.get())
+//	}
+//}
 
 repositories {
 	mavenCentral()
 }
 
-extra["springAiVersion"] = "1.1.7"
-
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-	implementation("org.springframework.ai:spring-ai-starter-model-openai")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	//implementation("org.springframework.boot:spring-boot-starter-security")
-	compileOnly("org.projectlombok:lombok")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	//testImplementation("org.springframework.security:spring-security-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation(platform(libs.spring.ai.bom))
+	implementation(libs.bundles.web)
+	implementation(libs.spring.ai.openai)
+	//implementation(libs.spring.boot.starter.data.jpa)
+	//implementation("libs.spring.boot.starter.security")
+	//compileOnly("libs.lombok")
+	//developmentOnly("libs.spring.boot.devtools")
+	//runtimeOnly("libs.h2")
+	//annotationProcessor("libs.lombok")
+	testImplementation(libs.spring.boot.starter.test)
+	//testImplementation("libs.spring.security.test")
+	//testRuntimeOnly("libs.junit.platform.launcher")
 }
 
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
-	}
-}
-
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
 }

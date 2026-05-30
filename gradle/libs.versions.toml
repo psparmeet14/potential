@@ -1,0 +1,45 @@
+[versions]
+spring-boot = "3.5.6"
+spring-ai = "1.1.7"
+dependency-management = "1.1.7"
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+dependency-management = { id = "io.spring.dependency-management", version.ref = "dependency-management" }
+
+[libraries]
+
+# BOM
+spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "spring-ai" }
+
+# Spring Boot Starters
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
+# Spring AI
+spring-ai-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
+
+# Data
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+
+# Security
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+
+# Development
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+
+# Database
+h2 = { module = "com.h2database:h2" }
+
+# Annotation Processing
+lombok = { module = "org.projectlombok:lombok" }
+
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[bundles]
+web = [
+    "spring-boot-starter-web",
+    "spring-boot-starter-thymeleaf"
+]
