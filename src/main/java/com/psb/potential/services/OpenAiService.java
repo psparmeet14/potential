@@ -1,5 +1,6 @@
 package com.psb.potential.services;
 
+import com.psb.potential.text.prompttemplate.dtos.CountryCuisines;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -41,5 +42,20 @@ public class OpenAiService {
         return chatClient.prompt(prompt)
                 .call()
                 .chatResponse().getResult().getOutput().getText();
+    }
+
+    public CountryCuisines getCuisines(String country, String numCuisines, String language) {
+        PromptTemplate promptTemplate = new PromptTemplate("You are an expert in traditional cuisines.\n" +
+                "You provide information about a specific dish from a specific\n" +
+                "country.\n" +
+                "Answer the question: What is the traditional cuisine of {country}?\n" +
+                "Return a list of {numCuisines} in {language}.\n" +
+                "Avoid giving information about fictional places. If the country is\n" +
+                "fictional\n" +
+                "or non-existent answer: I don't know.");
+        Prompt prompt = promptTemplate.create(Map.of("country", country, "numCuisines", numCuisines, "language", language));
+        return chatClient.prompt(prompt)
+                .call()
+                .entity(CountryCuisines.class);
     }
 }

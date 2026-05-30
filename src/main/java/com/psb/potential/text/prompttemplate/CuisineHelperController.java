@@ -1,5 +1,6 @@
 package com.psb.potential.text.prompttemplate;
 
+import com.psb.potential.text.prompttemplate.dtos.CountryCuisines;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,8 @@ public class CuisineHelperController {
 
     @PostMapping("/cuisineHelper")
     public String getChatResponse(@RequestParam("country") String country, @RequestParam("numCuisines") String numCuisines,@RequestParam("language") String language,Model model) {
-   
+        CountryCuisines countryCuisines = chatService.getCuisines(country, numCuisines, language);
+        model.addAttribute("countryCuisines", countryCuisines);
         return "cuisineHelper";
     }
 }
