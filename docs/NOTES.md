@@ -23,3 +23,11 @@
    - QuestionAnswerAdvisor: When working with RAG
    - SimpleLoggerAdvisor: To log the outgoing and incoming messages
    - SafeGuardAdvisor: To prevent the model from generating offensive content
+
+4. **Embeddings**:
+   - A vector representation of a word or phrase.
+   - Numerical representations of text capturing semantic meaning.
+   - Used to compare words or phrases for similarity.
+   - We can measure cosine similarity between two embeddings to determine their similarity.
+   - High similarity indicates that the words or phrases are semantically related, while low similarity suggests they are different in meaning.
+   - Use cases: Document similarity, Search Engines, Recommendation Systems, Language Translation, etc.

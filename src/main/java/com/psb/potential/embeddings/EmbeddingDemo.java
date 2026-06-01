@@ -23,9 +23,10 @@ public class EmbeddingDemo {
 
 	@PostMapping("/embedding")
 	public String embed(@RequestParam String text,Model model) {
+		float[] response = service.embed(text);
+		model.addAttribute("response", response);
 		return "embedDemo";
 
 	}
-	
 
 }
