@@ -3,11 +3,15 @@ package com.psb.potential.services;
 import com.psb.potential.text.prompttemplate.dtos.CountryCuisines;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,9 @@ public class OpenAiService {
 
     @Autowired
     private EmbeddingModel embeddingModel;
+
+    @Autowired
+    private VectorStore vectorStore;
 
     public OpenAiService(ChatClient.Builder builder, ChatMemory chatMemory) {
         this.chatClient = builder
@@ -72,6 +79,24 @@ public class OpenAiService {
     public double findSimilarity(String text1, String text2) {
         List<float[]> response = embeddingModel.embed(List.of(text1, text2));
         return cosineSimilarity(response.get(0), response.get(1));
+    }
+
+    public List<Document> searchJobs(String query) {
+        return vectorStore.similaritySearch(
+                SearchRequest.builder()
+                        .topK(3)
+                        .query(query)
+                        .build());
+    }
+
+    public String answer(String query) {
+        QuestionAnswerAdvisor qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
+                .searchRequest(SearchRequest.builder()
+                        .similarityThreshold(0.8d)
+                        .topK(6)
+                        .build())
+                .build();
+        return chatClient.prompt(query).advisors(qaAdvisor).call().content();
     }
 
     private double cosineSimilarity(float[] vectorA, float[] vectorB) {

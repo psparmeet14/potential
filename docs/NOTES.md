@@ -31,3 +31,11 @@
    - We can measure cosine similarity between two embeddings to determine their similarity.
    - High similarity indicates that the words or phrases are semantically related, while low similarity suggests they are different in meaning.
    - Use cases: Document similarity, Search Engines, Recommendation Systems, Language Translation, etc.
+
+5. **Vector Databases or Vector Stores**:
+   - Allows us to store or retrieve data using high-dimensional vectors.
+   - A database or storage system that stores vectors.
+   - Used to store and retrieve embeddings for efficient similarity comparisons.
+   - Vector databases are typically used for large-scale data analysis and retrieval.
+   - Vector stores are typically used for real-time applications where fast similarity comparisons are required.
+   - Different types: Chroma, Faiss, Pinecone, Lance, etc.

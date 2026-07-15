@@ -19,6 +19,8 @@ spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-star
 
 # Spring AI
 spring-ai-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
+spring-ai-vector-store = { module = "org.springframework.ai:spring-ai-advisors-vector-store" }
+spring-ai-pinecone = { module = "org.springframework.ai:spring-ai-starter-vector-store-pinecone" }
 
 # Data
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
